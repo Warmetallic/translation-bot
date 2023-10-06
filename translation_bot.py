@@ -1,9 +1,8 @@
 from decouple import config
 import telebot
-from telebot import types
-import requests
 import json
 from keyboards.inline_markup import create_language_markup
+from API.api_function import api_connect
 
 
 # Getting secret keys from decouple
@@ -26,26 +25,26 @@ def start(message):
     )
 
 
-@bot.message_handler(content_types=["photo"])
-def get_text(message):
-    input_text = message.text.strip().lower()
+# @bot.message_handler(content_types=["photo"])
+# def get_text(message):
+#     input_text = message.text.strip().lower()
 
-    # Specify the parameters for the DeepL API request
-    params = {
-        "auth_key": api_key,  # Your DeepL API key
-        "text": input_text,
-        "target_lang": "ru",  # Target language (e.g., Russian)
-    }
+#     # Specify the parameters for the DeepL API request
+#     params = {
+#         "auth_key": api_key,  # Your DeepL API key
+#         "text": input_text,
+#         "target_lang": "ru",  # Target language (e.g., Russian)
+#     }
 
-    # Make a GET request to the DeepL API
-    res = requests.get(deepl_api_endpoint, params=params)
+#     # Make a GET request to the DeepL API
+#     res = requests.get(deepl_api_endpoint, params=params)
 
-    if res.status_code == 200:
-        data = json.loads(res.text)
-        translated_text = data["translations"][0]["text"]
-        bot.reply_to(message, translated_text)
-    else:
-        bot.reply_to(message, "Translation failed. Please try again later.")
+#     if res.status_code == 200:
+#         data = json.loads(res.text)
+#         translated_text = data["translations"][0]["text"]
+#         bot.reply_to(message, translated_text)
+#     else:
+#         bot.reply_to(message, "Translation failed. Please try again later.")
 
 
 @bot.callback_query_handler(func=lambda call: True)
@@ -67,26 +66,21 @@ def callback(call):
 
 def translate_function(message, target_lang):
     user_input = message.text
-    params = {
-        "auth_key": api_key,
-        "text": user_input,
-        "target_lang": target_lang,
-    }
-
-    res = requests.get(deepl_api_endpoint, params=params)
+    # request to Deepl's API
+    res = api_connect(user_input, target_lang)
 
     if res.status_code == 200:
         data = json.loads(res.text)
         translated_text = data["translations"][0]["text"]
-        bot.send_message(
-            message.chat.id,
+        bot.reply_to(
+            message,
             f"Translation: {translated_text}",
             reply_markup=create_language_markup(),
         )
 
     else:
-        bot.send_message(
-            message.chat.id,
+        bot.reply_to(
+            message,
             "Translation failed. Please try again later.",
         )
 
