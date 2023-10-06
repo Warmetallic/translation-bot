@@ -3,6 +3,7 @@ import telebot
 from telebot import types
 import requests
 import json
+from keyboards.inline_markup import create_language_markup
 
 
 # Getting secret keys from decouple
@@ -17,10 +18,7 @@ deepl_api_endpoint = "https://api-free.deepl.com/v2/translate"
 
 @bot.message_handler(commands=["start"])
 def start(message):
-    markup = types.InlineKeyboardMarkup()
-    bt1 = types.InlineKeyboardButton("РУ 🇷🇺", callback_data="RUS")
-    bt2 = types.InlineKeyboardButton("ENG 🇬🇧", callback_data="ENG")
-    markup.add(bt1, bt2, row_width=2)
+    markup = create_language_markup()
     bot.send_message(
         message.chat.id,
         "Выберите на какой язык хотите перевести текст:\nChoose which language you need to translate into:",
