@@ -16,7 +16,7 @@ bot = telebot.TeleBot(bot_key)
 deepl_api_endpoint = "https://api-free.deepl.com/v2/translate"
 
 
-@bot.message_handler(commands=["start"])
+@bot.message_handler(commands=["translate"])
 def start(message):
     markup = create_language_markup()
     bot.send_message(
@@ -26,7 +26,7 @@ def start(message):
     )
 
 
-@bot.message_handler(content_types=["text"])
+@bot.message_handler(content_types=["photo"])
 def get_text(message):
     input_text = message.text.strip().lower()
 
@@ -52,9 +52,42 @@ def get_text(message):
 def callback(call):
     if "RUS" in call.data:
         bot.send_message(call.message.chat.id, "Введите текст для перевода на русский:")
+        # Set the callback state for this user to 'api'
+        bot.register_next_step_handler(
+            call.message, translate_function, target_lang="ru"
+        )
     elif "ENG" in call.data:
         bot.send_message(
             call.message.chat.id, "Введите текст для перевода на английский:"
+        )
+        bot.register_next_step_handler(
+            call.message, translate_function, target_lang="en"
+        )
+
+
+def translate_function(message, target_lang):
+    user_input = message.text
+    params = {
+        "auth_key": api_key,
+        "text": user_input,
+        "target_lang": target_lang,
+    }
+
+    res = requests.get(deepl_api_endpoint, params=params)
+
+    if res.status_code == 200:
+        data = json.loads(res.text)
+        translated_text = data["translations"][0]["text"]
+        bot.send_message(
+            message.chat.id,
+            f"Translation: {translated_text}",
+            reply_markup=create_language_markup(),
+        )
+
+    else:
+        bot.send_message(
+            message.chat.id,
+            "Translation failed. Please try again later.",
         )
 
 
