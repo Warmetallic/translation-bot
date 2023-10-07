@@ -3,7 +3,8 @@
 Translation Bot is a Python-based Telegram bot that allows users to translate text between different languages. It utilizes the DeepL API for translation and stores translation history in an SQLite database.
 ![image](https://github.com/Warmetallic/translation-bot/assets/35700332/62f2ebf4-dcd2-45d3-b2f5-9c12fccf5550)
 
-##LINK: [@GK_TRANSLATE_BOT]
+## LINK: 
+[@GK_TRANSLATE_BOT]
 
 ## Features
 
