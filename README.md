@@ -23,7 +23,7 @@ Follow these instructions to get a copy of the project up and running on your lo
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/yourusername/translation-bot.git
+   git clone https://github.com/warmetallic/translation-bot.git
    cd translation-bot
 
 2. Create a virtual environment (optional but recommended):
