@@ -19,6 +19,8 @@ def create_db():
 
     conn.commit()
     conn.close()
+    # Return a success message or a boolean indicating success
+    return "Database created successfully"
 
 
 def update_user(user_id, original_text, translated_text):
@@ -33,6 +35,7 @@ def update_user(user_id, original_text, translated_text):
 
     conn.commit()
     conn.close()
+    return "User history updated successfully"
 
 
 def get_user_history(user_id):

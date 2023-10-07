@@ -98,7 +98,7 @@ def translate_function(message, target_lang):
         translated_text = data["translations"][0]["text"]
         bot.reply_to(
             message,
-            f"Translation: {translated_text}",
+            f"{translated_text}",
             reply_markup=create_language_markup(),
         )
         update_user(message.from_user.id, user_input, translated_text)
