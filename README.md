@@ -39,7 +39,7 @@ Follow these instructions to get a copy of the project up and running on your lo
    =====================or=======================
    poetry install
    
-4. Install the required dependencies:
+4. Create a .env file in the project root directory and add your DeepL API key:
 
    ```bash
     BOT_KEY=your_telegram_bot_token
