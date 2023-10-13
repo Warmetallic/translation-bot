@@ -22,12 +22,14 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 ### Installation
 
-1. Clone the repository to your local machine:
+1. Clone the repository to your local machine. Also possible to use Docker image:
 
    ```bash
    git clone https://github.com/warmetallic/translation-bot.git
    cd translation-bot
+   docker pull warmetallic/translation-bot
 
+   
 2. Create a virtual environment (optional but recommended):
    
    ```bash
