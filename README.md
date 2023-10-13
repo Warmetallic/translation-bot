@@ -2,6 +2,8 @@
 
 Translation Bot is a Python-based Telegram bot that allows users to translate text between different languages. It utilizes the DeepL API for translation and stores translation history in an SQLite database.
 
+@GK_TRANSLATE_BOT - bot's username in telegram
+
 ## Features
 
 - Translate text between various languages.
@@ -20,12 +22,14 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 ### Installation
 
-1. Clone the repository to your local machine:
+1. Clone the repository to your local machine. Also possible to use Docker image:
 
    ```bash
-   git clone https://github.com/yourusername/translation-bot.git
+   git clone https://github.com/warmetallic/translation-bot.git
    cd translation-bot
+   docker pull warmetallic/translation-bot
 
+   
 2. Create a virtual environment (optional but recommended):
    
    ```bash
@@ -68,3 +72,4 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 
 ![image](https://github.com/Warmetallic/translation-bot/assets/35700332/c28fb169-ad18-468a-a366-a50a9b37ae16) 
+
