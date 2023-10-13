@@ -27,8 +27,9 @@ Follow these instructions to get a copy of the project up and running on your lo
    ```bash
    git clone https://github.com/warmetallic/translation-bot.git
    cd translation-bot
-   
-   ```bash
+
+   =================================================
+
    docker pull warmetallic/translation-bot
 
 
